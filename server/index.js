@@ -6,6 +6,7 @@ require("./connection/connection");
 
 // COLLECTIONS
 const User = require("./routes/user-route");
+const Books = require("./routes/book-route");
 
 // MIDDLEWARE
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // ROUTES
 app.use("/api/v1", User);
+app.use("/api/v1", Books);
 
 
 app.get('/', (req, res) => {
