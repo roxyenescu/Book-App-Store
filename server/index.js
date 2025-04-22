@@ -7,6 +7,7 @@ require("./connection/connection");
 // COLLECTIONS
 const User = require("./routes/user-route");
 const Books = require("./routes/book-route");
+const Favourite = require("./routes/favourite-route");
 
 // MIDDLEWARE
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(express.json());
 // ROUTES
 app.use("/api/v1", User);
 app.use("/api/v1", Books);
+app.use("/api/v1", Favourite);
 
 
 app.get('/', (req, res) => {
