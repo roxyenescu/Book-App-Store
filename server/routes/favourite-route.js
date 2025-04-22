@@ -21,7 +21,7 @@ router.put("/add-book-to-favourite", authenticateToken, async (req, res) => {
 });
 
 // REMOVE A BOOK FROM FAVOURITE
-router.delete("/delete-book-from-favourite", authenticateToken, async (req, res) => {
+router.put("/delete-book-from-favourite", authenticateToken, async (req, res) => {
     try {
         const { bookid, id } = req.headers;
         const userData = await User.findById(id);
