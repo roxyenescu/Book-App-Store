@@ -9,6 +9,7 @@ const User = require("./routes/user-route");
 const Books = require("./routes/book-route");
 const Favourite = require("./routes/favourite-route");
 const Cart = require("./routes/cart-route");
+const Order = require("./routes/order-route");
 
 // MIDDLEWARE
 app.use(cors());
@@ -19,6 +20,7 @@ app.use("/api/v1", User);
 app.use("/api/v1", Books);
 app.use("/api/v1", Favourite);
 app.use("/api/v1", Cart);
+app.use("/api/v1", Order);
 
 
 app.get('/', (req, res) => {
