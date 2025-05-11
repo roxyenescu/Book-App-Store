@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './pages/Home';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AllBooks from './pages/AllBooks';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
@@ -13,7 +13,6 @@ import ViewBookDetails from './components/ViewBookDetails/ViewBookDetails';
 const App = () => {
   return (
     <div>
-      <Router>
         <Navbar />
 
         <Routes>
@@ -27,7 +26,6 @@ const App = () => {
         </Routes>
 
         <Footer />
-      </Router>
     </div>
   );
 };

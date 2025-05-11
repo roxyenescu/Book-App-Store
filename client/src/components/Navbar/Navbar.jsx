@@ -2,6 +2,7 @@ import React, { useActionState, useState } from 'react';
 import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { FaGripLines } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const links = [
@@ -23,6 +24,11 @@ const Navbar = () => {
     },
   ];
 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  if (isLoggedIn === false) {
+    links.splice(2, 2); 
+  }
   const [MobileNav, setMobileNav] = useState("hidden");
 
   return (
@@ -58,7 +64,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className='block md:hiddentext-white text-2xl hover:text-zinc-400'
+            className='block md:hidden text-white text-2xl hover:text-zinc-400'
             onClick={() =>
               MobileNav === "hidden"
                 ? setMobileNav("block")
