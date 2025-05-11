@@ -27,7 +27,7 @@ const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   if (isLoggedIn === false) {
-    links.splice(2, 2); 
+    links.splice(2, 2);
   }
   const [MobileNav, setMobileNav] = useState("hidden");
 
@@ -43,25 +43,39 @@ const Navbar = () => {
           <div className="hidden md:flex gap-4">
             {
               links.map((items, i) => (
-                <Link
-                  to={items.link}
-                  className="hover:text-yellow-300 transition-all duration-300"
-                  key={i}
-                >
-                  {items.title}
-                </Link>
+                <div className='flex items-center' key={i}>
+                  {
+                    items.title === "Profile" ? (
+                      <Link
+                        to={items.link}
+                        className="px-4 py-1 border border-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300"
+                      >
+                        {items.title}
+                      </Link>
+                    ) : (
+                      <Link
+                        to={items.link}
+                        className="hover:text-yellow-300 transition-all duration-300"
+                      >
+                        {items.title}
+                      </Link>
+                    )
+                  }
+                </div>
               ))
             }
           </div>
 
-          <div className="hidden md:flex gap-4">
-            <Link to="/log-in" className="px-4 py-1 border border-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300">
-              Log In
-            </Link>
-            <Link to="/sign-up" className="px-4 py-1 border bg-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300">
-              Sign Up
-            </Link>
-          </div>
+          {isLoggedIn === false && (
+            <div className="hidden md:flex gap-4">
+              <Link to="/log-in" className="px-4 py-1 border border-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300">
+                Log In
+              </Link>
+              <Link to="/sign-up" className="px-4 py-1 border bg-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300">
+                Sign Up
+              </Link>
+            </div>
+          )}
 
           <button
             className='block md:hidden text-white text-2xl hover:text-zinc-400'
@@ -94,12 +108,22 @@ const Navbar = () => {
           ))
         }
 
-        <Link to="/log-in" className={` ${MobileNav} px-8 mb-8 text-2xl font-semibold py-2 border border-yellow-300 rounded text-white hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300`}>
-          Log In
-        </Link>
-        <Link to="/sign-up" className={` ${MobileNav} px-8 mb-8 text-2xl font-semibold py-2 border bg-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300`}>
-          Sign Up
-        </Link>
+        {isLoggedIn === false && (
+          <>
+            <Link
+              to="/log-in"
+              className={` ${MobileNav} px-8 mb-8 text-2xl font-semibold py-2 border border-yellow-300 rounded text-white hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300`}
+            >
+              Log In
+            </Link>
+            <Link
+              to="/sign-up"
+              className={` ${MobileNav} px-8 mb-8 text-2xl font-semibold py-2 border bg-yellow-300 rounded hover:bg-pink-200 hover:text-zinc-800 transition-all duration-300`}
+            >
+              Sign Up
+            </Link>
+          </>
+        )}
       </div>
     </>
   );
