@@ -49,7 +49,7 @@ const user = new mongoose.Schema(
                 ref: "books",
             }
         ],
-        arders: [
+        orders: [
             {
                 type: mongoose.Types.ObjectId,
                 ref: "order",
