@@ -5,11 +5,14 @@ import { Link } from 'react-router-dom';
 import { FaUserLarge } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { IoOpenOutline } from "react-icons/io5";
+import SeeUserData from './SeeUserData';
 
 const AllOrders = () => {
   const [AllOrders, setAllOrders] = useState();
   const [Options, setOptions] = useState(-1);
   const [Values, setValues] = useState({ status: "" });
+  const [userDiv, setuserDiv] = useState("hidden");
+  const [userDivData, setuserDivData] = useState();
 
   const headers = {
     id: localStorage.getItem("id"),
@@ -156,6 +159,14 @@ const AllOrders = () => {
             </div>
           ))}
         </div>
+      )}
+
+      {userDivData && (
+        <SeeUserData
+          userDivData={userDivData}
+          userDiv={userDiv}
+          setuserDiv={setuserDiv}
+        />
       )}
     </>
   )
