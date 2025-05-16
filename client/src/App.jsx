@@ -10,6 +10,8 @@ import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import Cart from './pages/Cart';
 import Profile from './pages/Profile';
+import AllOrders from './pages/AllOrders';
+import AddBook from './pages/AddBook';
 import ViewBookDetails from './components/ViewBookDetails/ViewBookDetails';
 import Favourites from './components/Profile/Favourites';
 import UserOrderHistory from './components/Profile/UserOrderHistory';
@@ -34,7 +36,15 @@ const App = () => {
         <Route path="/all-books" element={<AllBooks />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} >
-          <Route index element={<Favourites />} />
+          {role === "user" ? (
+            <Route index element={<Favourites />} />
+          ) : (
+            <Route index element={<AllOrders />} />
+          )}
+
+          {role === "admin" && (
+            <Route path="/profile/add-book" element={<AddBook />} />
+          )}
           <Route path="/profile/order-history" element={<UserOrderHistory />} />
           <Route path="/profile/settings" element={<Settings />} />
         </Route>
