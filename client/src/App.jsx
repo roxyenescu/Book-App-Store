@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import AllOrders from './pages/AllOrders';
 import AddBook from './pages/AddBook';
+import UpdateBook from './pages/UpdateBook';
 import ViewBookDetails from './components/ViewBookDetails/ViewBookDetails';
 import Favourites from './components/Profile/Favourites';
 import UserOrderHistory from './components/Profile/UserOrderHistory';
@@ -50,6 +51,7 @@ const App = () => {
         </Route>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
+        <Route path="/update-book/:id" element={<UpdateBook />} />
         <Route path="/view-book-details/:id" element={<ViewBookDetails />} />
       </Routes>
 
