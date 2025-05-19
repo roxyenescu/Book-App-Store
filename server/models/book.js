@@ -14,6 +14,10 @@ const book = new mongoose.Schema(
             type: String,
             required: true,
         },
+        genre: {
+            type: [String],
+            required: true,
+        },
         price: {
             type: Number,
             required: true,
