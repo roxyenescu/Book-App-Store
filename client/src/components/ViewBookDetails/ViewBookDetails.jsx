@@ -107,6 +107,22 @@ const ViewBookDetails = () => {
                     <div className='p-4 w-full lg:w-3/6'>
                         <h1 className='text-4xl text-zinc-300 font-semibold'>{Data.title}</h1>
                         <p className='text-zinc-400 mt-1'>by {Data.author}</p>
+                        {Data.genre && Data.genre.length > 0 && (
+                            <div className='mt-4 text-zinc-400'>
+                                <strong>Genre:</strong>
+                                <div className='flex flex-wrap gap-2 mt-2'>
+                                    {Data.genre.map((g, i) => (
+                                        <span
+                                            key={i}
+                                            className='bg-yellow-200 text-zinc-900 px-3 py-1 rounded-full text-sm font-semibold'
+                                        >
+                                            {g}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                         <p className='text-zinc-500 mt-4 text-xl'>{Data.desc}</p>
                         <p className='flex mt-4 items-center justify-start text-zinc-400'>
                             <GrLanguage className='me-3' /> {Data.language}

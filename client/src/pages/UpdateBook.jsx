@@ -1,8 +1,46 @@
 import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { groupedGenreOptions } from '../constants/genreOptions';
 
 const UpdateBook = () => {
+    const customStylesGenre = {
+        control: (base) => ({
+            ...base,
+            backgroundColor: '#18181b',
+            borderColor: '#3f3f46',
+            color: '#e4e4e7',
+        }),
+        menu: (base) => ({
+            ...base,
+            backgroundColor: '#18181b',
+            color: '#e4e4e7',
+        }),
+        option: (base, state) => ({
+            ...base,
+            backgroundColor: state.isFocused ? '#27272a' : '#18181b', // hover
+            color: '#e4e4e7',
+            cursor: 'pointer',
+        }),
+        multiValue: (base) => ({
+            ...base,
+            backgroundColor: '#3f3f46',
+        }),
+        multiValueLabel: (base) => ({
+            ...base,
+            color: '#e4e4e7',
+        }),
+        multiValueRemove: (base) => ({
+            ...base,
+            color: '#e4e4e7',
+            ':hover': {
+                backgroundColor: '#52525b',
+                color: 'white',
+            },
+        }),
+    };
+
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -10,6 +48,7 @@ const UpdateBook = () => {
         url: "",
         title: "",
         author: "",
+        genre: [],
         price: "",
         desc: "",
         language: "",
@@ -32,6 +71,7 @@ const UpdateBook = () => {
                 Data.url === "" ||
                 Data.title === "" ||
                 Data.author === "" ||
+                Data.genre.length === 0 ||
                 Data.price === "" ||
                 Data.desc === "" ||
                 Data.language === ""
@@ -47,6 +87,7 @@ const UpdateBook = () => {
                     url: "",
                     title: "",
                     author: "",
+                    genre: [],
                     price: "",
                     desc: "",
                     language: "",
@@ -72,7 +113,7 @@ const UpdateBook = () => {
     return (
         <div className='bg-zinc-900 h-[100%] p-0 md:p-4'>
             <h1 className='text-3xl md:text-5xl font-semibold text-zinc-500 mb-8'>
-                update Book
+                Update Book
             </h1>
             <div className='p-4 bg-zinc-800 rounded'>
                 <div>
@@ -115,6 +156,27 @@ const UpdateBook = () => {
                         required
                         value={Data.author}
                         onChange={change}
+                    />
+                </div>
+                <div className="mt-4">
+                    <label className="text-zinc-400">
+                        Genre
+                    </label>
+                    <Select
+                        isMulti
+                        name="genre"
+                        options={groupedGenreOptions}
+                        styles={customStylesGenre}
+                        className="mt-2"
+                        classNamePrefix="select"
+                        value={groupedGenreOptions
+                            .flatMap(group => group.options)
+                            .filter(option => Data.genre.includes(option.value))
+                        }
+                        onChange={(selected) => {
+                            const genres = selected.map(option => option.value);
+                            setData({ ...Data, genre: genres });
+                        }}
                     />
                 </div>
                 <div className='mt-4 flex gap-4'>
