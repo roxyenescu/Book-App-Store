@@ -8,15 +8,13 @@ const RecommendedByAuthor = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const role = useSelector(state => state.auth.role);
 
-    if (!isLoggedIn || role !== 'user') {
-        return null;
-    }
-
     const [books, setBooks] = useState(null);
     const [topAuthor, setTopAuthor] = useState('');
     const [error, setError] = useState('');
 
     useEffect(() => {
+        if (!isLoggedIn || role !== 'user') return;
+
         const fetchByAuthor = async () => {
             try {
                 const headers = {
@@ -93,8 +91,9 @@ const RecommendedByAuthor = () => {
         };
 
         fetchByAuthor();
-    }, []);
+    }, [isLoggedIn, role]);
 
+    if (!isLoggedIn || role !== 'user') return null;
     if (!books && !error) return <Loader />;
     if (error || books.length === 0) return null;
 
