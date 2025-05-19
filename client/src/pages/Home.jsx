@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../components/Home/Hero'
 import RecentlyAdded from '../components/Home/RecentlyAdded';
 import RecommendedBoth from '../components/Home/RecommendedBoth';
+import RecommendedByGenre from '../components/Home/RecommendedByGenre';
 import RecommendedByAuthor from '../components/Home/RecommendedByAuthor';
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
       <Hero />
       <RecentlyAdded />
       <RecommendedBoth />
+      <RecommendedByGenre />
       <RecommendedByAuthor />
     </div>
   )
