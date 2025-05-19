@@ -13,7 +13,7 @@ import Profile from './pages/Profile';
 import AllOrders from './pages/AllOrders';
 import AddBook from './pages/AddBook';
 import UpdateBook from './pages/UpdateBook';
-import ViewBookDetails from './components/ViewBookDetails/ViewBookDetails';
+import BookDetails from './pages/BookDetails';
 import Favourites from './components/Profile/Favourites';
 import UserOrderHistory from './components/Profile/UserOrderHistory';
 import Settings from './components/Profile/Settings';
@@ -52,7 +52,7 @@ const App = () => {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/update-book/:id" element={<UpdateBook />} />
-        <Route path="/view-book-details/:id" element={<ViewBookDetails />} />
+        <Route path="/view-book-details/:id" element={<BookDetails />} />
       </Routes>
 
       <Footer />
