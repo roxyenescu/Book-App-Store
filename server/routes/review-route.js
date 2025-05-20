@@ -4,6 +4,7 @@ const Order = require('../models/order');
 const { authenticateToken } = require('./userAuth-route');
 const Sentiment = require('sentiment');
 const sentiment = new Sentiment();
+const axios = require('axios');
 
 // ADD REVIEW
 router.post('/add-review', authenticateToken, async (req, res) => {
@@ -17,15 +18,28 @@ router.post('/add-review', authenticateToken, async (req, res) => {
             return res.status(403).json({ message: 'You can only review books you purchased.' });
         }
 
-        // Run sentiment analysis on the comment text
+        // Global sentiment analysis per comment
         const result = sentiment.analyze(comment || '');
         const score = result.score;
         const label = score > 0 ? 'positive' : score < 0 ? 'negative' : 'neutral'; // positive >0, negative <0, neutral =0
 
-        // Upsert the review with the computed label
+        // Call to aspect-based sentiment service (ABSA)
+        let aspectSentiments = {};
+        try {
+            const aspectRes = await axios.post(
+                'http://localhost:8001/analyze_aspects',
+                { text: comment || '' },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
+            aspectSentiments = aspectRes.data.aspects;
+        } catch (err) {
+            console.error('Failed to analyze aspects:', err.message);
+        }
+
+        // Upsert review in Mongo with the new "aspects" field
         const review = await Review.findOneAndUpdate(
             { user: userId, book: bookId },
-            { rating, comment, sentiment: label },
+            { rating, comment, sentiment: label, aspects: aspectSentiments },
             { upsert: true, new: true }
         );
 

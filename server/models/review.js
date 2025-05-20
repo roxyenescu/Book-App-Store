@@ -26,6 +26,10 @@ const reviewSchema = new mongoose.Schema(
             enum: ['positive', 'neutral', 'negative'],
             default: 'neutral'
         },
+        aspects: {
+            type: Map,
+            of: String
+        }
     },
     { timestamps: true }
 );
