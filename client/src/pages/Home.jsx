@@ -4,6 +4,7 @@ import RecentlyAdded from '../components/Home/RecentlyAdded';
 import RecommendedBoth from '../components/Home/RecommendedBoth';
 import RecommendedByGenre from '../components/Home/RecommendedByGenre';
 import RecommendedByAuthor from '../components/Home/RecommendedByAuthor';
+import PositiveRecommendations from '../components/SentimentAnalysis/PositiveRecommendations';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <RecommendedBoth />
       <RecommendedByGenre />
       <RecommendedByAuthor />
+      <PositiveRecommendations />
     </div>
   )
 }
