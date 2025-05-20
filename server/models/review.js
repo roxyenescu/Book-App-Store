@@ -4,12 +4,12 @@ const reviewSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Types.ObjectId,
-            ref: 'user', 
+            ref: 'user',
             required: true
         },
         book: {
             type: mongoose.Types.ObjectId,
-            ref: 'books', 
+            ref: 'books',
             required: true
         },
         rating: {
@@ -20,6 +20,11 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             trim: true
 
+        },
+        sentiment: {
+            type: String,
+            enum: ['positive', 'neutral', 'negative'],
+            default: 'neutral'
         },
     },
     { timestamps: true }
