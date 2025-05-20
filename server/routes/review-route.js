@@ -2,6 +2,8 @@ const router = require('express').Router();
 const Review = require('../models/review');
 const Order = require('../models/order');
 const { authenticateToken } = require('./userAuth-route');
+const Sentiment = require('sentiment');
+const sentiment = new Sentiment();
 
 // ADD REVIEW
 router.post('/add-review', authenticateToken, async (req, res) => {
