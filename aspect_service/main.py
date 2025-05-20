@@ -12,8 +12,8 @@ aspect_classifier = pipeline(
 sentiment_analyzer = pipeline("sentiment-analysis")
 
 # 3) Define the list of relevant aspects for reviews
-ASPECTS = ["story", "characters", "writing style", "translation", "pacing",
-            "plot", "originality", "suspense", "dialogue", "themes"]
+ASPECTS = ["story", "characters", "writing style", "translation", 
+           "pacing", "plot", "suspense", "dialogue", "themes", "book"]
 
 app = FastAPI()
 
@@ -31,26 +31,21 @@ async def analyze_aspects(input: ReviewIn):
         if score > 0.1  # confidence threshold
     ]
 
-    # 4b) Fallback: include manually if the word actually appears
-    for aspect in ASPECTS:
-        if aspect not in chosen and aspect in text:
-            chosen.append(aspect)
-
     # 5) For each selected aspect, run sentiment analysis
     results = {}
     for aspect in chosen:
-        # 5a) Extract the sentences that contain the aspect
-        sents = [s.strip() for s in text.split(".") if aspect in s]
-        if not sents:
-            chunk = text  # total fallback
-        else:
-            sent = sents[0]
-            # 5b) Divide by commas and periods and select exactly the segment with the appearance
-            parts = [p.strip() for p in sent.replace(";", ",").split(",")]
-            segment = next((p for p in parts if aspect in p), sent)
-            chunk = segment
+        # 5a) Find the sentences that contain exactly the word-aspect
+        sentences = [s.strip() for s in text.split(".") if aspect in s]
+        if not sentences:
+            # If there is none, omit this aspect
+            continue
 
-        # 6) Analyze the sentiment of the fragment
+        # 5b) Take the first sentence and, optionally, cut after the comma for clarity
+        first = sentences[0]
+        parts = [p.strip() for p in first.replace(";", ",").split(",")]
+        chunk = next((p for p in parts if aspect in p), first)
+
+        # 6) Analyze the feeling of that fragment
         pol = sentiment_analyzer(chunk)[0]
         results[aspect] = pol["label"].lower()
 
