@@ -17,10 +17,15 @@ router.post('/add-review', authenticateToken, async (req, res) => {
             return res.status(403).json({ message: 'You can only review books you purchased.' });
         }
 
-        // Upsert a review (one per user/book)
+        // Run sentiment analysis on the comment text
+        const result = sentiment.analyze(comment || '');
+        const score = result.score;
+        const label = score > 0 ? 'positive' : score < 0 ? 'negative' : 'neutral'; // positive >0, negative <0, neutral =0
+
+        // Upsert the review with the computed label
         const review = await Review.findOneAndUpdate(
             { user: userId, book: bookId },
-            { rating, comment },
+            { rating, comment, sentiment: label },
             { upsert: true, new: true }
         );
 
