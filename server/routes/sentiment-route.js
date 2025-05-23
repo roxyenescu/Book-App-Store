@@ -153,6 +153,25 @@ router.get('/recommend-for-you', authenticateToken, async (req, res) => {
         // Define the aspect pairs and their labels
         const aspectPairs = [
             { key: 'story_themes', label: 'Rich story & deep themes', a1: 'story', a2: 'themes' },
+            { key: 'characters_suspense', label: 'Complex characters & high suspense', a1: 'characters', a2: 'suspense' },
+            { key: 'book_story', label: 'Well-crafted book & captivating story', a1: 'book', a2: 'story' },
+            { key: 'characters_themes', label: 'Deep characters & meaningful themes', a1: 'characters', a2: 'themes' },
+            { key: 'book_themes', label: 'Well-crafted book & deep themes', a1: 'book', a2: 'themes' },
+            { key: 'book_suspense', label: 'Well-crafted book & high suspense', a1: 'book', a2: 'suspense' },
+            { key: 'story_suspense', label: 'Engaging story & high suspense', a1: 'story', a2: 'suspense' },
+            { key: 'characters_book', label: 'Complex characters & well-crafted book', a1: 'characters', a2: 'book' },
+            { key: 'themes_suspense', label: 'Deep themes & high suspense', a1: 'themes', a2: 'suspense' },
+            { key: 'characters_story', label: 'Rich characters & captivating story', a1: 'characters', a2: 'story' },
+            { key: 'writing_style_translation', label: 'Polished writing style & accurate translation', a1: 'writing style', a2: 'translation' },
+            { key: 'writing_style_plot', label: 'Exquisite writing style & strong plot', a1: 'writing style', a2: 'plot' },
+            { key: 'translation_plot', label: 'Accurate translation & strong plot', a1: 'translation', a2: 'plot' },
+            { key: 'translation_pacing', label: 'Accurate translation & good pacing', a1: 'translation', a2: 'pacing' },
+            { key: 'dialogue_pacing', label: 'Witty dialogue & good pacing', a1: 'dialogue', a2: 'pacing' },
+            { key: 'dialogue_suspense', label: 'Witty dialogue & high suspense', a1: 'dialogue', a2: 'suspense' },
+            { key: 'plot_pacing', label: 'Engaging plot & steady pacing', a1: 'plot', a2: 'pacing' },
+            { key: 'plot_themes', label: 'Engaging plot & meaningful themes', a1: 'plot', a2: 'themes' },
+            { key: 'writing_style_story', label: 'Exquisite writing style & captivating story', a1: 'writing style', a2: 'story' },
+            { key: 'dialogue_story', label: 'Witty dialogue & captivating story', a1: 'dialogue', a2: 'story' }
         ];
 
         const result = {};
