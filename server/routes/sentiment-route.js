@@ -141,5 +141,63 @@ router.get('/recommend-by-review/:bookId', authenticateToken, async (req, res) =
 }
 );
 
+// GET personalized "For You" recommendations based on aspect pairs
+router.get('/recommend-for-you', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.headers.id;
+
+        // Extract the books purchased by the user (to exclude them)
+        const userOrders = await Order.find({ user: userId }).select('book').lean();
+        const purchasedIds = new Set(userOrders.map(o => String(o.book)));
+
+        // Define the aspect pairs and their labels
+        const aspectPairs = [
+            { key: 'story_themes', label: 'Rich story & deep themes', a1: 'story', a2: 'themes' },
+        ];
+
+        const result = {};
+
+        for (const { key, label, a1, a2 } of aspectPairs) {
+            // Check if the user has ever had a review with both positive aspects
+            const hasPair = await Review.exists({
+                user: userId,
+                [`aspects.${a1}`]: 'positive',
+                [`aspects.${a2}`]: 'positive',
+                rating: { $gte: 4 }
+            });
+            if (!hasPair) {
+                result[key] = { label, books: [] };
+                continue;
+            }
+
+            // Collect reviews from other users that have both positive aspects + rating ≥ 4 + positive sentiment
+            const good = await Review.find({
+                rating: { $gte: 4 },
+                sentiment: 'positive',
+                [`aspects.${a1}`]: 'positive',
+                [`aspects.${a2}`]: 'positive'
+            })
+                .select('book')
+                .lean();
+
+            // Extract unique IDs and exclude what has already been purchased
+            const uniq = Array.from(new Set(
+                good.map(r => String(r.book))
+                    .filter(id => !purchasedIds.has(id))
+            )).slice(0, 4);
+
+            const books = await Book.find({ _id: { $in: uniq } }).lean();
+
+            result[key] = { label, books };
+        }
+
+        return res.json({ status: 'Success', data: result });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 
 module.exports = router;
