@@ -30,32 +30,34 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-zinc-900 text-white">
       <Navbar />
 
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/all-books" element={<AllBooks />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/for-you" element={<ForYou />} />
-        <Route path="/profile" element={<Profile />} >
-          {role === "user" ? (
-            <Route index element={<Favourites />} />
-          ) : (
-            <Route index element={<AllOrders />} />
-          )}
+      <main className="flex-1 px-4 py-8 space-y-12">
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/all-books" element={<AllBooks />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/for-you" element={<ForYou />} />
+          <Route path="/profile" element={<Profile />} >
+            {role === "user" ? (
+              <Route index element={<Favourites />} />
+            ) : (
+              <Route index element={<AllOrders />} />
+            )}
 
-          {role === "admin" && (
-            <Route path="/profile/add-book" element={<AddBook />} />
-          )}
-          <Route path="/profile/order-history" element={<UserOrderHistory />} />
-          <Route path="/profile/settings" element={<Settings />} />
-        </Route>
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/log-in" element={<LogIn />} />
-        <Route path="/update-book/:id" element={<UpdateBook />} />
-        <Route path="/view-book-details/:id" element={<BookDetails />} />
-      </Routes>
+            {role === "admin" && (
+              <Route path="/profile/add-book" element={<AddBook />} />
+            )}
+            <Route path="/profile/order-history" element={<UserOrderHistory />} />
+            <Route path="/profile/settings" element={<Settings />} />
+          </Route>
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/log-in" element={<LogIn />} />
+          <Route path="/update-book/:id" element={<UpdateBook />} />
+          <Route path="/view-book-details/:id" element={<BookDetails />} />
+        </Routes>
+      </main>
 
       <Footer />
     </div>

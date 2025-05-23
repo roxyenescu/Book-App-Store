@@ -58,25 +58,24 @@ const Cart = () => {
   };
 
   return (
-    <div className='bg-zinc-900 px-12 h-screen py-8'>
+    <div className='flex-1 bg-zinc-900 px-12 py-8'>
       {!Cart && (
-        <div className='w-full h-[100%] flex items-center justify-center'>
+        <div className='w-full flex-1 flex items-center justify-center'>
           <Loader />
         </div>
       )}
       {Cart && Cart.length === 0 && (
-        <div className='h-screen'>
-          <div className='h-[100%] flex items-center justify-center flex-col'>
-            <h1 className='text-5xl lg:text-6xl font-semibold text-zinc-400'>
-              Empty Cart
-            </h1>
-            <img
-              src='/empty-cart.png'
-              alt='empty cart'
-              className='lg:h-[50vh]'
-            />
-          </div>
+        <div className='flex-1 flex items-center justify-center flex-col'>
+          <h1 className='text-5xl lg:text-6xl font-semibold text-zinc-400'>
+            Empty Cart
+          </h1>
+          <img
+            src='/empty-cart.png'
+            alt='empty cart'
+            className='lg:h-[50vh]'
+          />
         </div>
+
       )}
       {Cart && Cart.length > 0 && (
         <>
