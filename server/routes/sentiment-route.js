@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Review = require('../models/review');
 const Book = require("../models/book");
+const Order = require('../models/order');
 const axios = require('axios');
 const { authenticateToken } = require("./userAuth-route");
 
@@ -72,6 +73,66 @@ router.get('/recommend-from-sentiment', authenticateToken, async (req, res) => {
 
     res.json({ status: 'Success', data: { topAuthor, topGenre, recs } });
 });
+
+// GET recommendations after very positive review
+// -> rating ≥ 4 
+// -> positive sentiment  
+// -> positive "book"/"story" aspects
+router.get(
+    '/recommend-by-review/:bookId',
+    authenticateToken,
+    async (req, res) => {
+        try {
+            const userId = req.headers.id;
+            const reviewedBookId = req.params.bookId;
+
+            // Get the genres of the reviewed book
+            const baseBook = await Book.findById(reviewedBookId).lean();
+            if (!baseBook) return res.status(404).json({ message: 'Book not found' });
+            const genres = baseBook.genre;
+
+            // Find out what books the user has already purchased (not to recommend them)
+            const userOrders = await Order.find({ user: userId }).select('book');
+            const purchasedIds = userOrders.map(o => String(o.book));
+
+            // Find all books in the same genres, excluding already purchased and reviewed ones
+            const candidates = await Book.find({
+                _id: { $nin: [...purchasedIds, reviewedBookId] },
+                genre: { $in: genres },
+            }).select('_id').lean();
+            const candidateBookIds = candidates.map(b => b._id);
+
+            if (candidateBookIds.length === 0) {
+                return res.json({ status: 'Success', data: [] });
+            }
+
+            // Filter them by rating ≥ 4 + only reviews with positive sentiment + OR between the three scenarios:
+            // a) positive book + story does NOT exist
+            // b) positive story + book does NOT exist
+            // c) both positive
+            const goodReviews = await Review.find({
+                book: { $in: candidateBookIds },
+                rating: { $gte: 4 },
+                sentiment: 'positive',
+                $or: [
+                    { 'aspects.book': 'positive', 'aspects.story': { $exists: false } },
+                    { 'aspects.story': 'positive', 'aspects.book': { $exists: false } },
+                    { 'aspects.book': 'positive', 'aspects.story': 'positive' }
+                ]
+            })
+                .select('book')
+                .lean();
+
+            const uniq = [...new Set(goodReviews.map(r => String(r.book)))].slice(0, 4);
+            const recBooks = await Book.find({ _id: { $in: uniq } }).lean();
+
+            return res.json({ status: 'Success', data: recBooks });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+);
 
 
 module.exports = router;
