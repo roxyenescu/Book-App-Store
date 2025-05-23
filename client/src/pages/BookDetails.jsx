@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ViewBookDetails from '../components/ViewBookDetails/ViewBookDetails';
 import ReviewForm from '../components/Reviews/ReviewForm';
 import ReviewList from '../components/Reviews/ReviewList';
+import ReviewedBookRecommendations from '../components/SentimentAnalysis/ReviewedBookRecommendations';
 import axios from 'axios';
 
 const BookDetails = () => {
@@ -48,10 +49,16 @@ const BookDetails = () => {
 
             <div className="px-4 md:px-12 mt-12">
                 {isLoggedIn && role === 'user' && hasPurchased && (
-                    <ReviewForm
-                        bookId={bookId}
-                        onReview={handleNewReview}
-                    />
+                    <>
+                        <ReviewForm
+                            bookId={bookId}
+                            onReview={handleNewReview}
+                        />
+                        <ReviewedBookRecommendations
+                            bookId={bookId}
+                            refreshFlag={newReviewFlag}
+                        />
+                    </>
                 )}
 
                 <ReviewList
