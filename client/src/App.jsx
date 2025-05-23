@@ -9,6 +9,7 @@ import AllBooks from './pages/AllBooks';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import Cart from './pages/Cart';
+import ForYou from './pages/ForYou';
 import Profile from './pages/Profile';
 import AllOrders from './pages/AllOrders';
 import AddBook from './pages/AddBook';
@@ -36,6 +37,7 @@ const App = () => {
         <Route exact path="/" element={<Home />} />
         <Route path="/all-books" element={<AllBooks />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/for-you" element={<ForYou />} />
         <Route path="/profile" element={<Profile />} >
           {role === "user" ? (
             <Route index element={<Favourites />} />

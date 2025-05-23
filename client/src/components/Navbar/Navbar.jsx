@@ -5,42 +5,28 @@ import { FaGripLines } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const role = useSelector(state => state.auth.role);
+
   const links = [
-    {
-      title: "Home",
-      link: "/",
-    },
-    {
-      title: "All Books",
-      link: "/all-books",
-    },
-    {
-      title: "Cart",
-      link: "/cart",
-    },
-    {
-      title: "Profile",
-      link: "/profile",
-    },
-    {
-      title: "Admin Profile",
-      link: "/profile",
-    },
+    { title: "Home", link: "/" },
+    { title: "All Books", link: "/all-books" },
   ];
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const role = useSelector((state) => state.auth.role);
-
-  if (isLoggedIn === false) {
-    links.splice(2, 2);
+  if (isLoggedIn && role === "user") {
+    links.push({ title: "For You", link: "/for-you" });
   }
 
-  if (isLoggedIn == true && role === "user") {
-    links.splice(4, 1);
+  if (!(isLoggedIn && role === "admin")) {
+    links.push({ title: "Cart", link: "/cart" });
   }
 
-  if (isLoggedIn == true && role === "admin") {
-    links.splice(3, 1);
+  if (isLoggedIn) {
+    if (role === "admin") {
+      links.push({ title: "Admin Profile", link: "/profile" });
+    } else {
+      links.push({ title: "Profile", link: "/profile" });
+    }
   }
 
   const [MobileNav, setMobileNav] = useState("hidden");
