@@ -4,7 +4,8 @@ import BookCard from '../BookCard/BookCard';
 import Loader from '../Loader/Loader';
 
 const RecentlyAdded = () => {
-  const [Data, setData] = useState();
+  const [Data, setData] = useState([]);
+  
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -18,21 +19,31 @@ const RecentlyAdded = () => {
   return (
     <div className='mt-8 px-4'>
       <h4 className='text-3xl text-yellow-100'>Recently added books</h4>
-      {
-        !Data && (
-          <div className='flex items-center justify-center my-8'>
-            <Loader />{" "}
+      {!Data.length && (
+        <div className="flex items-center justify-center my-8">
+          <Loader />
+        </div>
+      )}
+
+      {/* DESKTOP */}
+      <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 my-8">
+        {Data.map((items, i) => (
+          <div key={i}>
+            <BookCard data={items} />
           </div>
-        )
-      }
-      <div className='my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8'>
-        {
-          Data && Data.map((items, i) => (
-            <div key={i}>
-              <BookCard data={items} />{" "}
-            </div>
-          ))
-        }
+        ))}
+      </div>
+
+      {/* MOBILE */}
+      <div className="flex sm:hidden gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory my-8">
+        {Data.map((item, i) => (
+          <div
+            key={item._id || i}
+            className="flex-shrink-0 w-full snap-start"
+          >
+            <BookCard data={item} />
+          </div>
+        ))}
       </div>
     </div >
   );
