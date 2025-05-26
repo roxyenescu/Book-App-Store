@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import BookCard from '../BookCard/BookCard';
+import BookCard from '../../BookCard/BookCard';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
 const PositiveRecommendations = () => {

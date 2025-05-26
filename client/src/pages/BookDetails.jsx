@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ViewBookDetails from '../components/ViewBookDetails/ViewBookDetails';
 import ReviewForm from '../components/Reviews/ReviewForm';
 import ReviewList from '../components/Reviews/ReviewList';
-import ReviewedBookRecommendations from '../components/SentimentAnalysis/ReviewedBookRecommendations';
+import ReviewedBookRecommendations from '../components/Reviews/ReviewedBookRecommendations';
 import axios from 'axios';
 
 const BookDetails = () => {

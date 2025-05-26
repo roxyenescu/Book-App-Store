@@ -6,10 +6,6 @@ import MostPurchasedThisWeek from '../components/Home/MostPurchasedThisWeek';
 import OriginalPicks from '../components/Home/OriginalPicks';
 import LaughOutLoudReads from '../components/Home/LaughOutLoudReads';
 import DialogueHeavyDramas from '../components/Home/DialogueHeavyDramas';
-import RecommendedBoth from '../components/Home/RecommendedBoth';
-import RecommendedByGenre from '../components/Home/RecommendedByGenre';
-import RecommendedByAuthor from '../components/Home/RecommendedByAuthor';
-import PositiveRecommendations from '../components/SentimentAnalysis/PositiveRecommendations';
 
 const Home = () => {
   return (
@@ -21,10 +17,6 @@ const Home = () => {
       <OriginalPicks />
       <LaughOutLoudReads />
       <DialogueHeavyDramas />
-      <RecommendedBoth />
-      <RecommendedByGenre />
-      <RecommendedByAuthor />
-      <PositiveRecommendations />
     </div>
   )
 }

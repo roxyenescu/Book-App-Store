@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import BookCard from '../BookCard/BookCard';
+import BookCard from '../../BookCard/BookCard';
 
 const ForYouRecommendations = () => {
   const isLoggedIn = useSelector(s => s.auth.isLoggedIn);

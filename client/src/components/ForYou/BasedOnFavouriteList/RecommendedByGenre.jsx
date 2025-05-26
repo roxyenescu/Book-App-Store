@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import BookCard from '../BookCard/BookCard';
-import Loader from '../Loader/Loader';
+import BookCard from '../../BookCard/BookCard';
+import Loader from '../../Loader/Loader';
 
 const RecommendedByGenre = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
