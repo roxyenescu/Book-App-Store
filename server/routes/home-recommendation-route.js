@@ -75,4 +75,50 @@ router.get('/most-purchased-this-week', async (req, res) => {
     }
 });
 
+// GET Original Picks — public
+// Top 4 books with positive originality aspect, 5 stars and positive reviews
+router.get('/original-picks', async (req, res) => {
+    try {
+        // 1) Aggregate reviews matching criteria
+        const agg = await Review.aggregate([
+            {
+                $match: {
+                    rating: 5,
+                    sentiment: 'positive',
+                    'aspects.originality': 'positive'
+                }
+            },
+            {
+                $group: {
+                    _id: '$book',
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { count: -1 }
+            },
+            {
+                $limit: 4
+            }
+        ]);
+
+        // 2) Extract book IDs in order
+        const bookIds = agg.map(item => item._id);
+
+        // 3) Fetch book documents
+        let books = await Book.find({ _id: { $in: bookIds } }).lean();
+
+        // 4) Re-order books to match aggregation ranking
+        books = bookIds
+            .map(id => books.find(b => b._id.toString() === id.toString()))
+            .filter(Boolean);
+
+        // 5) Return result
+        res.json({ status: 'Success', data: books });
+    } catch (err) {
+        console.error('Error in /original-picks:', err);
+        res.status(500).json({ status: 'Error', message: 'Internal server error' });
+    }
+});
+
 module.exports = router;
