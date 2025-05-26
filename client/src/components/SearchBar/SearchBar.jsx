@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 
-const SearchBar = ({ value, onChange, placeholder }) => (
+const SearchBar = ({ value, onChange, placeholder, className = '' }) => (
     <div className={`relative ${className}`}>
         <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" />
         <input
