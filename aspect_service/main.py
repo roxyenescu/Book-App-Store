@@ -13,7 +13,8 @@ sentiment_analyzer = pipeline("sentiment-analysis")
 
 # 3) Define the list of relevant aspects for reviews
 ASPECTS = ["story", "characters", "writing style", "translation", 
-           "pacing", "plot", "suspense", "dialogue", "themes", "book"]
+           "pacing", "plot", "suspense", "dialogue", "themes", "book",
+           "originality", "setting", "emotion", "humor"]
 
 app = FastAPI()
 
