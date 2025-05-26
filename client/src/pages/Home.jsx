@@ -4,6 +4,7 @@ import RecentlyAdded from '../components/Home/RecentlyAdded';
 import HotThisWeek from '../components/Home/HotThisWeek';
 import MostPurchasedThisWeek from '../components/Home/MostPurchasedThisWeek';
 import OriginalPicks from '../components/Home/OriginalPicks';
+import LaughOutLoudReads from '../components/Home/LaughOutLoudReads';
 import RecommendedBoth from '../components/Home/RecommendedBoth';
 import RecommendedByGenre from '../components/Home/RecommendedByGenre';
 import RecommendedByAuthor from '../components/Home/RecommendedByAuthor';
@@ -17,6 +18,7 @@ const Home = () => {
       <HotThisWeek />
       <MostPurchasedThisWeek />
       <OriginalPicks />
+      <LaughOutLoudReads />
       <RecommendedBoth />
       <RecommendedByGenre />
       <RecommendedByAuthor />
