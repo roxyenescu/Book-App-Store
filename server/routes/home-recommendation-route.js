@@ -155,4 +155,45 @@ router.get('/laugh-out-loud-reads', async (req, res) => {
     }
 });
 
+// GET Laugh-Out-Loud Reads — public
+// Top 4 books with positive dialogue + emotion aspects, 5 stars and positive reviews
+router.get('/dialogue-heavy-dramas', async (req, res) => {
+    try {
+        const agg = await Review.aggregate([
+            {
+                $match: {
+                    rating: 5,
+                    sentiment: 'positive',
+                    'aspects.dialogue': 'positive',
+                    'aspects.emotion': 'positive'
+                }
+            },
+            {
+                $group: {
+                    _id: '$book',
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { count: -1 }
+            },
+            {
+                $limit: 4
+            }
+        ]);
+
+        const bookIds = agg.map(item => item._id);
+        let books = await Book.find({ _id: { $in: bookIds } }).lean();
+
+        books = bookIds
+            .map(id => books.find(b => b._id.toString() === id.toString()))
+            .filter(Boolean);
+
+        res.json({ status: 'Success', data: books });
+    } catch (err) {
+        console.error('Error in /dialogue-heavy-dramas:', err);
+        res.status(500).json({ status: 'Error', message: 'Internal server error' });
+    }
+});
+
 module.exports = router;
