@@ -5,7 +5,7 @@ import Loader from '../Loader/Loader';
 
 const RecentlyAdded = () => {
   const [Data, setData] = useState([]);
-  
+
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -15,6 +15,10 @@ const RecentlyAdded = () => {
     };
     fetch();
   }, []);
+
+  if (Data.length === 0) {
+    return null;
+  }
 
   return (
     <div className='mt-8 px-4'>
