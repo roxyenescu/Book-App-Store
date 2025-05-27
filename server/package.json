@@ -20,6 +20,7 @@
     "mongoose": "^8.13.2",
     "node": "^23.11.0",
     "nodemon": "^3.1.9",
-    "sentiment": "^5.0.2"
+    "sentiment": "^5.0.2",
+    "stripe": "^18.1.1"
   }
 }

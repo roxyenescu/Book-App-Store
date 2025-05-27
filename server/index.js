@@ -13,6 +13,7 @@ const Order = require("./routes/order-route");
 const Review = require('./routes/review-route');
 const Sentiment = require('./routes/sentiment-route');
 const HomeRecommendation = require('./routes/home-recommendation-route');
+const Payments = require('./routes/payments-route');
 
 // MIDDLEWARE
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/api/v1", Order);
 app.use('/api/v1', Review);
 app.use('/api/v1', Sentiment);
 app.use('/api/v1', HomeRecommendation);
+app.use('/api/v1', Payments);
 
 
 app.get('/', (req, res) => {
