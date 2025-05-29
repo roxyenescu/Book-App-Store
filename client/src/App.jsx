@@ -13,6 +13,7 @@ import ForYou from './pages/ForYou';
 import Profile from './pages/Profile';
 import AllOrders from './pages/AllOrders';
 import AddBook from './pages/AddBook';
+import AdminAnalytics from './pages/AdminAnalytics';
 import UpdateBook from './pages/UpdateBook';
 import BookDetails from './pages/BookDetails';
 import Favourites from './components/Profile/Favourites';
@@ -47,7 +48,10 @@ const App = () => {
             )}
 
             {role === "admin" && (
-              <Route path="/profile/add-book" element={<AddBook />} />
+              <>
+                <Route path="/profile/add-book" element={<AddBook />} />
+                <Route path="/profile/analytics" element={<AdminAnalytics />} />
+              </>
             )}
             <Route path="/profile/order-history" element={<UserOrderHistory />} />
             <Route path="/profile/settings" element={<Settings />} />

@@ -62,6 +62,13 @@ const Sidebar = ({ data }) => {
                     >
                         Add Book
                     </Link>
+
+                    <Link
+                        to='/profile/analytics'
+                        className='text-zinc-100 font-semibold w-full py-2 mt-4 text-center hover:bg-zinc-900 rounded transition-all duration-300'
+                    >
+                        Analytics
+                    </Link>
                 </div>
             )}
 

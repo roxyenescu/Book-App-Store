@@ -47,6 +47,13 @@ const MobileNav = () => {
                     >
                         Add Book
                     </Link>
+
+                    <Link
+                        to='/profile/analytics'
+                        className='text-zinc-100 font-semibold w-full text-center hover:bg-zinc-900 rounded transition-all duration-300'
+                    >
+                        Analytics
+                    </Link>
                 </div>
             )}
         </>
