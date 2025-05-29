@@ -6,7 +6,7 @@ const SeeUserData = ({ userDivData, userDiv, setuserDiv }) => {
         <>
             <div className={`${userDiv} top-0 left-0 h-screen w-full bg-zinc-800 opacity-80`}></div>
             <div className={`${userDiv} top-0 left-0 h-screen w-full flex items-center justify-center`}>
-                <div className='bg-white rounded p-4 w-[80%] md:w-[50%] lg:w-[40%] text-zinc-800'>
+                <div className='bg-yellow-200 rounded p-4 w-[80%] md:w-[50%] lg:w-[40%] text-zinc-800'>
                     <div className='flex items-center justify-between'>
                         <h1 className='text-2xl font-semibold'>
                             User Informations
@@ -23,6 +23,16 @@ const SeeUserData = ({ userDivData, userDiv, setuserDiv }) => {
                     <div className='mt-4'>
                         <label>
                             Email : <span className='font-semibold'>{userDivData.email}</span>
+                        </label>
+                    </div>
+                    <div className='mt-4'>
+                        <label>
+                            First name : <span className='font-semibold'>{userDivData.firstName}</span>
+                        </label>
+                    </div>
+                    <div className='mt-4'>
+                        <label>
+                            Last name : <span className='font-semibold'>{userDivData.lastName}</span>
                         </label>
                     </div>
                     <div className='mt-4'>
