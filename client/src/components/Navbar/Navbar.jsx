@@ -15,9 +15,6 @@ const Navbar = () => {
 
   if (isLoggedIn && role === "user") {
     links.push({ title: "For You", link: "/for-you" });
-  }
-
-  if (!(isLoggedIn && role === "admin")) {
     links.push({ title: "Cart", link: "/cart" });
   }
 
