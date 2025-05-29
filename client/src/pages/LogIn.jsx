@@ -92,7 +92,7 @@ const LogIn = () => {
           <p className='flex mt-4 items-center justify-center text-zinc-500 font-semibold'>
             Don't have an account? &nbsp;
             <Link to='/sign-up' className='text-blue-200 hover:text-blue-500'>
-              <u>Sing Up</u>
+              <u>Sign Up</u>
             </Link>
           </p>
         </div>
