@@ -14,22 +14,37 @@ const ForYou = () => {
 
     return (
         <div className="bg-zinc-900 text-white px-4 py-8">
-            <h1 className="text-4xl text-yellow-200 font-semibold mb-8">
-                Based on your favourite list
-            </h1>
-            <RecommendedBoth />
-            <RecommendedByGenre />
-            <RecommendedByAuthor />
+            <div className='mb-10'>
+                <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
+                    Based on your favourite list
+                </h1>
+                <p className='text-zinc-500 italic'>
+                    Add some books to your favourites so we can suggest titles that match your preferred authors and genres.
+                </p>
+                <RecommendedBoth />
+                <RecommendedByGenre />
+                <RecommendedByAuthor />
+            </div>
 
-            <h1 className="text-4xl text-yellow-200 font-semibold mb-8">
-                Based on your general positive sentiment reviews
-            </h1>
-            <PositiveRecommendations />
+            <div className='mb-10'>
+                <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
+                    Based on your general positive sentiment reviews
+                </h1>
+                <p className='text-zinc-500 italic'>
+                    Leave positive reviews for the books you love to get recommendations tailored to your taste.
+                </p>
+                <PositiveRecommendations />
+            </div>
 
-            <h1 className="text-4xl text-yellow-200 font-semibold mb-8">
-                Based on your reviews
-            </h1>
-            <ForYouRecommendations />
+            <div className='rounded mb-8'>
+                <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
+                    Based on your reviews
+                </h1>
+                <p className='text-zinc-500 italic'>
+                    Write detailed reviews of the books you’ve read to unlock personalized suggestions.
+                </p>
+                <ForYouRecommendations />
+            </div>
         </div>
     );
 };
