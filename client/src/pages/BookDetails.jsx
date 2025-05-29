@@ -5,10 +5,10 @@ import ReviewForm from '../components/Reviews/ReviewForm';
 import ReviewList from '../components/Reviews/ReviewList';
 import ReviewedBookRecommendations from '../components/Reviews/ReviewedBookRecommendations';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const BookDetails = () => {
-    const { pathname } = window.location;
-    const bookId = pathname.split('/').pop();
+    const { id: bookId } = useParams();
 
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const role = useSelector(state => state.auth.role);
