@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Book = require("../models/book");
 const Order = require("../models/order");
 const { authenticateToken } = require("./userAuth-route");
+const stats = require("../controllers/statsController");
 
 // PLACE ORDER
 router.post("/place-order", authenticateToken, async (req, res) => {
@@ -99,6 +100,16 @@ router.put("/update-status/:id", authenticateToken, async (req, res) => {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });
     }
+});
+
+// GENRE SALES CURRENT YEAR
+router.get("/stats/genre-sales-year", authenticateToken, async (req, res) => {
+    return stats.genreSalesYear(req, res);
+});
+
+// STATUS DISTRIBUTION
+router.get("/stats/status-distribution", authenticateToken, async (req, res) => {
+    return stats.statusDistributionYear(req, res);
 });
 
 
