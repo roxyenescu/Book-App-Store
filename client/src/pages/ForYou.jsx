@@ -16,6 +16,16 @@ const ForYou = () => {
         <div className="bg-zinc-900 text-white px-4 py-8">
             <div className='mb-10'>
                 <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
+                    Based on your general positive sentiment reviews
+                </h1>
+                <p className='text-zinc-500 italic'>
+                    Leave positive reviews for the books you love to get recommendations tailored to your taste.
+                </p>
+                <PositiveRecommendations />
+            </div>
+
+            <div className='mb-10'>
+                <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
                     Based on your favourite list
                 </h1>
                 <p className='text-zinc-500 italic'>
@@ -26,17 +36,7 @@ const ForYou = () => {
                 <RecommendedByAuthor />
             </div>
 
-            <div className='mb-10'>
-                <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
-                    Based on your general positive sentiment reviews
-                </h1>
-                <p className='text-zinc-500 italic'>
-                    Leave positive reviews for the books you love to get recommendations tailored to your taste.
-                </p>
-                <PositiveRecommendations />
-            </div>
-
-            <div className='rounded mb-8'>
+            <div className='rounded mb-10'>
                 <h1 className="text-4xl text-yellow-200 font-semibold mb-4">
                     Based on your reviews
                 </h1>
