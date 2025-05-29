@@ -87,7 +87,7 @@ const ViewBookDetails = () => {
                                 <div className='flex flex-col md:flex-row lg:flex-col items-center justify-between lg:justify-start mt-4 lg:mt-0'>
                                     <Link
                                         to={`/update-book/${id}`}
-                                        className='bg-white rounded lg:rounded-full text-4xl lg:text-3xl p-3 flex items-center justify-center'
+                                        className='bg-black rounded lg:rounded-full text-4xl lg:text-3xl p-3 flex items-center justify-center'
                                     >
                                         <FaEdit />
                                         <span className='ms-4 block lg:hidden'>Edit Book</span>
