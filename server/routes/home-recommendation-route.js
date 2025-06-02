@@ -76,14 +76,14 @@ router.get('/most-purchased-this-week', async (req, res) => {
 });
 
 // GET Original Picks — public
-// Top 4 books with positive originality aspect, 5 stars and positive reviews
+// Top 4 books with positive originality aspect, 5 stars and positive/neutral reviews
 router.get('/original-picks', async (req, res) => {
     try {
         const agg = await Review.aggregate([
             {
                 $match: {
                     rating: 5,
-                    sentiment: 'positive',
+                    sentiment: { $in: ['positive', 'neutral'] },
                     'aspects.originality': 'positive'
                 }
             },
@@ -116,14 +116,14 @@ router.get('/original-picks', async (req, res) => {
 });
 
 // GET Laugh-Out-Loud Reads — public
-// Top 4 books with positive humor aspect, 5 stars and positive reviews
+// Top 4 books with positive humor aspect, 5 stars and positive/neutral reviews
 router.get('/laugh-out-loud-reads', async (req, res) => {
     try {
         const agg = await Review.aggregate([
             {
                 $match: {
                     rating: 5,
-                    sentiment: 'positive',
+                    sentiment: { $in: ['positive', 'neutral'] },
                     'aspects.humor': 'positive'
                 }
             },
@@ -155,15 +155,15 @@ router.get('/laugh-out-loud-reads', async (req, res) => {
     }
 });
 
-// GET Laugh-Out-Loud Reads — public
-// Top 4 books with positive dialogue + emotion aspects, 5 stars and positive reviews
+// GET Dialogue Heavy Dramas — public
+// Top 4 books with positive dialogue + emotion aspects, 5 stars and positive/neutral reviews
 router.get('/dialogue-heavy-dramas', async (req, res) => {
     try {
         const agg = await Review.aggregate([
             {
                 $match: {
                     rating: 5,
-                    sentiment: 'positive',
+                    sentiment: { $in: ['positive', 'neutral'] },
                     'aspects.dialogue': 'positive',
                     'aspects.emotion': 'positive'
                 }
